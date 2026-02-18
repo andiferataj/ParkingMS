@@ -1,17 +1,40 @@
-zones (
+-- Schema for ParkingMS
+CREATE TABLE IF NOT EXISTS zones (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    zone_name VARCHAR(50)
-)
-parking_spots (
+    zone_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    spot_number VARCHAR(10),
-    zone_id INT,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS admin_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS parking_spots (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    spot_number VARCHAR(10) NOT NULL,
+    zone_id INT NOT NULL,
     status ENUM('free', 'occupied') DEFAULT 'free',
+    current_user_id INT DEFAULT NULL,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (zone_id) REFERENCES zones(id)
-)
-admin_users (
+    FOREIGN KEY (zone_id) REFERENCES zones(id),
+    FOREIGN KEY (current_user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS reservations (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50),
-    password VARCHAR(255)
-)
+    user_id INT NOT NULL,
+    spot_id INT NOT NULL,
+    start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    end_time TIMESTAMP NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (spot_id) REFERENCES parking_spots(id)
+);
