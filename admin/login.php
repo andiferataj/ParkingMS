@@ -1,6 +1,41 @@
-<form action="../actions/login_action.php" method="POST">
-    <h2>Admin Login</h2>
-    <input type="text" name="username" placeholder="Username"><br>
-    <input type="password" name="password" placeholder="Password"><br>
-    <button type="submit">Login</button>
-</form>
+<?php
+include_once __DIR__ . '/../includes/db.php';
+session_start();
+?>
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Login - Prishtina Parking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../public/style.css">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="../public/index.php">Prishtina Parking</a>
+    </div>
+</nav>
+
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-5">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Admin Login</h4>
+                    <form action="../actions/login_action.php" method="POST">
+                        <div class="mb-3"><input class="form-control" type="text" name="username" placeholder="Username" required></div>
+                        <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" required></div>
+                        <div class="d-grid"><button class="btn btn-primary" type="submit">Login</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

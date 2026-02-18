@@ -1,20 +1,62 @@
 <?php
 include_once __DIR__ . '/../includes/db.php';
+include_once __DIR__ . '/../includes/auth.php';
 session_start();
 if (isset($_GET['logout'])) {
-    session_unset();
-    session_destroy();
-    header('Location: index.php');
-    exit();
+        session_unset();
+        session_destroy();
+        header('Location: index.php');
+        exit();
 }
 ?>
 
-<h2>User Login</h2>
-<?php if (!empty($_GET['error'])) echo '<p style="color:red">Login failed</p>'; ?>
-<form action="../actions/user_login_action.php" method="POST">
-    <input type="text" name="username" placeholder="Username"><br>
-    <input type="password" name="password" placeholder="Password"><br>
-    <button type="submit">Login</button>
-</form>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Prishtina Parking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="index.php">Prishtina Parking</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="register.php">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="../admin/login.php">Admin</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<p><a href="register.php">Register</a></p>
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">User Login</h4>
+                    <?php if (!empty($_GET['error'])): ?><div class="alert alert-danger">Login failed</div><?php endif; ?>
+                    <form action="../actions/user_login_action.php" method="POST">
+                        <div class="mb-3">
+                            <input class="form-control" type="text" name="username" placeholder="Username" required>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary" type="submit">Login</button>
+                        </div>
+                    </form>
+                    <p class="mt-3 mb-0">Don't have an account? <a href="register.php">Register</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
