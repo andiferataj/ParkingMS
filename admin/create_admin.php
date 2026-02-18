@@ -1,7 +1,14 @@
 <?php
 // One-click admin creator. Run from browser, then delete this file.
 include __DIR__ . '/../includes/db.php';
+include_once __DIR__ . '/../includes/auth.php';
 session_start();
+require_admin();
+if (!is_super_admin()) {
+  http_response_code(403);
+  echo "Forbidden: only superadmin can create admins.";
+  exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username'] ?? '');
@@ -9,23 +16,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$username || !$password) {
         $error = 'Provide username and password';
     } else {
-        // check existing
-        $check = $conn->prepare('SELECT id FROM admin_users WHERE username = ?');
-        $check->bind_param('s', $username);
-        $check->execute();
-        $res = $check->get_result();
-        if ($res && $res->fetch_assoc()) {
-            $error = 'Username already exists';
-        } else {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
-            $ins = $conn->prepare('INSERT INTO admin_users (username, password) VALUES (?, ?)');
-            $ins->bind_param('ss', $username, $hash);
-            if ($ins->execute()) {
-                $success = 'Admin created. Delete this file for security.';
-            } else {
-                $error = 'Insert failed: ' . $conn->error;
-            }
-        }
+    // check existing
+    $check = $conn->prepare('SELECT id FROM admin_users WHERE username = ?');
+    $check->bind_param('s', $username);
+    $check->execute();
+    $res = $check->get_result();
+    if ($res && $res->fetch_assoc()) {
+      $error = 'Username already exists';
+    } else {
+      $hash = password_hash($password, PASSWORD_DEFAULT);
+      $ins = $conn->prepare('INSERT INTO admin_users (username, password, is_super) VALUES (?, ?, 0)');
+      $ins->bind_param('ss', $username, $hash);
+      if ($ins->execute()) {
+        $success = 'Admin created. Delete this file for security.';
+      } else {
+        $error = 'Insert failed: ' . $conn->error;
+      }
+    }
     }
 }
 ?>

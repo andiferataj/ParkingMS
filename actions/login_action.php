@@ -5,7 +5,7 @@ session_start();
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
-$stmt = $conn->prepare("SELECT id,password FROM admin_users WHERE username = ?");
+$stmt = $conn->prepare("SELECT id,password,is_super FROM admin_users WHERE username = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $res = $stmt->get_result();
@@ -14,6 +14,7 @@ if ($row = $res->fetch_assoc()) {
     $hash = $row['password'];
     if (password_verify($password, $hash) || $password === $hash) {
         $_SESSION['admin_id'] = $row['id'];
+        $_SESSION['is_super'] = !empty($row['is_super']);
         header('Location: ../admin/dashboard.php');
         exit();
     }

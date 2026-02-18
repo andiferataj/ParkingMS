@@ -67,6 +67,11 @@ while ($spot = $res->fetch_assoc()) {
             </tbody>
         </table>
     </div>
+    <?php if (is_super_admin()): ?>
+        <div class="mt-4">
+            <a class="btn btn-success" href="create_admin.php">Create New Admin</a>
+        </div>
+    <?php endif; ?>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -31,6 +31,17 @@ include_once __DIR__ . '/../includes/auth.php';
                 <div class="card-body">
                     <h4 class="card-title mb-3">Register</h4>
                     <?php if (!empty($_GET['error'])): ?><div class="alert alert-danger">Registration failed</div><?php endif; ?>
+                    <?php
+                    // show admin checkbox only if no admins exist or current user is superadmin
+                    $showAdminCheckbox = false;
+                    $res = $conn->query('SELECT COUNT(*) as c FROM admin_users');
+                    if ($res) {
+                            $r = $res->fetch_assoc();
+                            if (intval($r['c']) === 0) $showAdminCheckbox = true;
+                    }
+                    if (is_admin() && is_super_admin()) $showAdminCheckbox = true;
+                    ?>
+
                     <form action="../actions/register_action.php" method="POST">
                         <div class="mb-3">
                             <input class="form-control" type="text" name="username" placeholder="Username" required>
@@ -38,6 +49,12 @@ include_once __DIR__ . '/../includes/auth.php';
                         <div class="mb-3">
                             <input class="form-control" type="password" name="password" placeholder="Password" required>
                         </div>
+                        <?php if ($showAdminCheckbox): ?>
+                        <div class="mb-3 form-check">
+                            <input class="form-check-input" type="checkbox" id="asAdmin" name="as_admin" value="1">
+                            <label class="form-check-label" for="asAdmin">Create account as admin</label>
+                        </div>
+                        <?php endif; ?>
                         <div class="d-grid">
                             <button class="btn btn-primary" type="submit">Register</button>
                         </div>

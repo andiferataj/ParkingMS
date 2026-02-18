@@ -36,4 +36,8 @@ function current_username() {
     return $_SESSION['username'] ?? null;
 }
 
+function is_super_admin() {
+    return !empty($_SESSION['is_super']);
+}
+
 ?>
