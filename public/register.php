@@ -1,7 +1,6 @@
 <?php
 include_once __DIR__ . '/../includes/db.php';
 include_once __DIR__ . '/../includes/auth.php';
-session_start();
 ?>
 
 <!doctype html>
