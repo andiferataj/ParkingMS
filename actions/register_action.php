@@ -1,9 +1,6 @@
 <?php
 include('../includes/db.php');
 session_start();
-<?php
-include('../includes/db.php');
-session_start();
 
 $username = trim($_POST['username'] ?? '');
 $password = $_POST['password'] ?? '';
