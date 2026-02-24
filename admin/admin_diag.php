@@ -1,6 +1,5 @@
 <?php
-// Diagnostic: lists admin users (id and username) to verify existence.
-// Delete this file after use.
+
 include __DIR__ . '/../includes/db.php';
 header('Content-Type: text/plain');
 echo "Admin users:\n";

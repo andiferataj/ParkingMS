@@ -2,9 +2,7 @@
 include("../includes/db.php");
 session_start();
 
-// basic admin protection (optional)
-// admin check is handled in dashboard but double-checking here is harmless
-// include_once __DIR__ . '/../includes/auth.php';
+
 
 $id = intval($_POST['id'] ?? 0);
 $status = $_POST['status'] ?? '';

@@ -1,6 +1,4 @@
 <?php
-// Run this once (via browser or CLI) to create tables from parking.sql
-// After successful run, delete this file for security.
 
 include __DIR__ . '/includes/db.php';
 
@@ -16,7 +14,7 @@ if ($sql === false) {
     exit;
 }
 
-// Execute multiple queries
+
 if ($conn->multi_query($sql)) {
     do {
         if ($res = $conn->store_result()) {

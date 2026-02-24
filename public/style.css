@@ -15,6 +15,5 @@ body{
 
 .text-muted-small{ font-size:0.85rem; color:#6c757d }
 
-/* keep small helpers for legacy classes */
 .zone-box{ display:flex; flex-wrap:wrap; gap:12px }
 

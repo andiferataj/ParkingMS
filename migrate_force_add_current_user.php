@@ -1,6 +1,5 @@
 <?php
-// Force-add current_user_id column and show parking_spots structure.
-// Run once via browser or CLI, then delete the file.
+
 include __DIR__ . '/includes/db.php';
 
 header('Content-Type: text/plain');

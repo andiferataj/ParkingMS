@@ -1,5 +1,5 @@
 <?php
-// One-click admin creator. Run from browser, then delete this file.
+
 include __DIR__ . '/../includes/db.php';
 include_once __DIR__ . '/../includes/auth.php';
 session_start();
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$username || !$password) {
         $error = 'Provide username and password';
     } else {
-    // check existing
+
     $check = $conn->prepare('SELECT id FROM admin_users WHERE username = ?');
     $check->bind_param('s', $username);
     $check->execute();

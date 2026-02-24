@@ -1,5 +1,5 @@
 <?php
-// Run once to add is_super column to admin_users
+
 include __DIR__ . '/includes/db.php';
 echo "Checking admin_users table...\n";
 $res = $conn->query("SHOW COLUMNS FROM admin_users LIKE 'is_super'");

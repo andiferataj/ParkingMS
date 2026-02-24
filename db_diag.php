@@ -1,6 +1,5 @@
 <?php
-// Diagnostic script - run in browser to inspect DB tables/columns.
-// Remove after use.
+
 include __DIR__ . '/includes/db.php';
 
 header('Content-Type: text/plain');
