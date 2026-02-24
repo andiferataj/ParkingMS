@@ -1,7 +1,6 @@
 <?php
 include("../includes/db.php");
 include_once __DIR__ . '/../includes/auth.php';
-session_start();
 require_admin();
 
 $stmt = $conn->prepare(
