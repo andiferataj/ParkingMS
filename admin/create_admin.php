@@ -2,7 +2,9 @@
 
 include __DIR__ . '/../includes/db.php';
 include_once __DIR__ . '/../includes/auth.php';
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_admin();
 if (!is_super_admin()) {
   http_response_code(403);
@@ -58,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="password" required></div>
             <div class="d-grid"><button class="btn btn-primary" type="submit">Create Admin</button></div>
           </form>
-          <p class="mt-3 small text-muted">After creating the admin, delete this file: <code>admin/create_admin.php</code></p>
         </div>
       </div>
     </div>
