@@ -1,19 +1,83 @@
 :root{
-  --primary:#0d6efd;
-  --bg:#f0f4f8;
+  --primary:#2563eb;
+  --bg:#eef2f7;
   --card:#ffffff;
+  --free:#22c55e;
+  --occupied:#ef4444;
 }
+
 body{
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial;
   background: var(--bg);
-  color:#222;
+  color:#1f2937;
 }
-.spot-card{ background: var(--card); border-radius:6px; }
-.spot-card.free{ box-shadow: 0 1px 3px rgba(13,110,253,0.08); }
-.spot-card.occupied{ box-shadow: 0 1px 3px rgba(0,0,0,0.05); opacity:0.95 }
-.card-title{ font-weight:600 }
 
-.text-muted-small{ font-size:0.85rem; color:#6c757d }
 
-.zone-box{ display:flex; flex-wrap:wrap; gap:12px }
+.navbar{
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
 
+
+.zone-title{
+  margin-top:40px;
+  margin-bottom:15px;
+  font-weight:600;
+  border-left:6px solid var(--primary);
+  padding-left:10px;
+}
+
+
+.spot-card{
+  background:var(--card);
+  border-radius:12px;
+  padding:10px;
+  transition:all .2s ease;
+  border:none;
+  text-align:center;
+}
+
+.spot-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+
+.spot-card.free{
+  border-top:6px solid var(--free);
+}
+
+
+.spot-card.occupied{
+  border-top:6px solid var(--occupied);
+  opacity:0.85;
+}
+
+
+.status-free{
+  color:var(--free);
+  font-weight:600;
+}
+
+.status-occupied{
+  color:var(--occupied);
+  font-weight:600;
+}
+
+.btn-take{
+  background:var(--primary);
+  border:none;
+}
+
+.btn-release{
+  border:1px solid var(--primary);
+  color:var(--primary);
+}
+
+.btn-release:hover{
+  background:var(--primary);
+  color:white;
+}
+
+.card{
+  border-radius:12px;
+}
